@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { Button, Offcanvas, Form } from 'react-bootstrap';
+import  { useState } from 'react';
+import { Button, Offcanvas } from 'react-bootstrap';
 import LoginForm from './LoginForm';
-import SignUpForm from './SignupForm';
+import SignUpForm from './SignUpForm';
 import {motion} from "framer-motion";
 
 function AuthCanvas() {
@@ -59,7 +59,7 @@ function AuthCanvas() {
             <>
               <LoginForm></LoginForm>
               <div className="mt-1">
-                <span>Don't have an account? </span>
+                <span>Do not have an account? </span>
 
                 <Button variant="link" onClick={toggleFormType}>
                   Create Account

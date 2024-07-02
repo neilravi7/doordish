@@ -5,13 +5,16 @@ import * as yup from 'yup';
 import { Spinner } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import { motion } from "framer-motion";
-import { login } from '../../../services/AuthServices';
+import { getUser, login } from '../../../services/AuthServices';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../../context/AuthProvider';
 
 const LoginForm = () => {
-    const { Formik } = formik;
     const navigate = useNavigate();
+    const { updateUserLogin, setUser } = useAuth(); // isLoggedIn
+
+    const { Formik } = formik;
     // Schema
     const schema = yup.object().shape({
         email: yup.string().required(),
@@ -24,11 +27,18 @@ const LoginForm = () => {
         if (response.isError) {
             setSubmitting(false);
             toast.error(`Login failed ${response.message}`);
-
         } else {
             setSubmitting(false);
             toast.success(response.message);
-            navigate("/home");
+            updateUserLogin(true);
+            const userData = await getUser();
+            setUser(userData);          
+            console.log("Is customer: ", userData.is_customer);
+            if(userData.is_customer){
+                navigate("/home");
+            }else{
+                navigate("/vendor/home");
+            }
         }
     };
 

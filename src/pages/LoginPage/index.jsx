@@ -1,7 +1,23 @@
 import { Container, Row, Col } from "react-bootstrap";
 import LoginForm from "../../components/Auth/AuthCanvas/LoginForm";
+import { useAuth } from "../../context/AuthProvider";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const LoginPage = () => {
+    const {isLoggedIn, user } = useAuth();
+    const navigate  = useNavigate();
+    
+    useEffect(() => {
+        // For already logged in user
+        if(isLoggedIn){
+            if(user.is_vendor){
+                navigate("/vendor/home");
+            }else{
+                navigate("/home");
+            }
+        }
+    });
     
     return(
         <Container className="col-xl-10 col-xxl-8px-4" >

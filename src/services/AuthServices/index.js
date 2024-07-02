@@ -6,6 +6,7 @@ const STORE_NAME = "auth";
 
 const serverUrl = import.meta.env.VITE_BACKEND_URL;
 
+// Make db instances
 async function getDb() {
   return await openDB(DB_NAME, 1, {
     upgrade(db) {
@@ -16,6 +17,7 @@ async function getDb() {
   });
 }
 
+// Setting and getting tokens
 export async function setToken(token) {
   const db = await getDb();
   const tx = db.transaction(STORE_NAME, "readwrite");
@@ -29,7 +31,11 @@ export async function getAccessToken() {
     .transaction(STORE_NAME)
     .objectStore(STORE_NAME)
     .get("admittance_jwt");
-  return token.access;
+  if (token) {
+    return token.access;
+  } else {
+    return null;
+  }
 }
 
 export async function getRefreshToken() {
@@ -47,6 +53,44 @@ export async function deleteToken() {
   tx.objectStore(STORE_NAME).delete("admittance_jwt");
   await tx.done;
 }
+
+// Decode the user information
+export const getUser = async () => {
+  const userInfo = await getAccessToken();
+  if (userInfo) {
+    const [, payload] = userInfo.split(".");
+    const decoded = window.atob(payload);
+    return JSON.parse(decoded);
+  } else {
+    return {
+      first_name: "",
+      last_name: "",
+      email: "",
+      is_vendor: false,
+      is_customer: false,
+      hasInfo: false,
+    };
+  }
+};
+
+// Location Preferences
+export async function setLocation(userLocation) {
+  const db = await getDb();
+  const tx = db.transaction(STORE_NAME, "readwrite");
+  tx.objectStore(STORE_NAME).put(userLocation, "userLocationPreferences");
+  await tx.done;
+}
+
+export async function getLocation() {
+  const db = await getDb();
+  const userLocation = await db
+    .transaction(STORE_NAME)
+    .objectStore(STORE_NAME)
+    .get("userLocationPreferences");
+  return userLocation.location;
+}
+
+//  Services for user login, logout and register.
 
 export async function login(values) {
   try {
@@ -66,7 +110,7 @@ export async function login(values) {
     if (error.response.status === 400 || error.response.status > 400) {
       return {
         isError: true,
-        message: `${error.response.status} Invalid credentials`
+        message: `${error.response.status} Invalid credentials`,
       };
     } else {
       // Handle network errors or other exceptions
@@ -81,9 +125,9 @@ export async function register(values) {
     if (response.status === 200 || response.status === 201) {
       console.log("Register Successfully");
       await setToken(response.data);
-      return { 
-        isError: false, 
-        message: "Register successfully" 
+      return {
+        isError: false,
+        message: "Register successfully",
       };
     } else {
       return {
@@ -96,7 +140,7 @@ export async function register(values) {
     if (error.response.status === 400 || error.response.status > 400) {
       return {
         isError: true,
-        message: `${error.response.status} Missing require fields.`
+        message: `${error.response.status} Missing require fields.`,
       };
     } else {
       // Handle network errors or other exceptions

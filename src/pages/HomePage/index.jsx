@@ -1,9 +1,11 @@
 import { Container } from "react-bootstrap";
 import Image from 'react-bootstrap/Image';
-import hero from '../../assets/react.svg'
-// import { useState } from "react";
-// const chef = "https://image.similarpng.com/very-thumbnail/2021/06/Hand-drawn-female-chef-on-transparent-background-PNG.png";
+import hero from '../../assets/images/dish4.jpg'
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthProvider";
+
 const HomePage = () => {
+    const {isLoggedIn, currentLocation, user} = useContext(AuthContext);        
     return (
         <>
             <Container fluid className="col-xxl-10">
@@ -42,8 +44,6 @@ const HomePage = () => {
                         </div>
                     </div>
                 </div>
-
-
             </Container>
         </>
     )

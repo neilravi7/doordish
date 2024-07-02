@@ -1,7 +1,17 @@
 import { Container, Row, Col } from "react-bootstrap";
-import SignUpForm from "../../components/Auth/AuthCanvas/SignupForm";
+import SignUpForm from "../../components/Auth/AuthCanvas/SignUpForm";
+import { useAuth } from "../../context/AuthProvider";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const SignUpPage = () => {
+    const navigate = useNavigate();
+    const {isLoggedIn} = useAuth();
+    useEffect(()=>{
+        if(isLoggedIn){
+            navigate("/home");
+        }
+    },[]);
     
     return(
         <Container className="col-xl-10 col-xxl-8px-4" >
