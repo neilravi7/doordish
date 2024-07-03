@@ -14,9 +14,10 @@ import VendorLayout from "./layouts/VendorLayout";
 const HomePage = React.lazy(() => import("./pages/HomePage"));
 const LoginPage = React.lazy(() => import('./pages/LoginPage'));
 const SignUpPage = React.lazy(() => import('./pages/SignUpPage'));
-const VendorHomePage = React.lazy(() => import('./pages/Vendor/VendorHomePage'))
-const VendorMenuPage = React.lazy(() => import('./pages/Vendor/VendorMenuPage'))
+const VendorHomePage = React.lazy(() => import('./pages/Vendor/VendorHomePage'));
+const VendorMenuPage = React.lazy(() => import('./pages/Vendor/VendorMenuPage'));
 const ProductDetail = React.lazy(() => import("./pages/Vendor/ProductDetail"));
+const VendorProfile = React.lazy(() => import("./pages/Vendor/VendorProfile"));
 
 const ProjectRoutes = () => {
     return (
@@ -40,7 +41,7 @@ const ProjectRoutes = () => {
                         <Route path={"/vendor/home"} element={<VendorHomePage />} />
                         <Route path={"/vendor/menu"} element={<VendorMenuPage />} />
                         <Route path={"/vendor/product/:productId"} element={<ProductDetail />} />
-
+                        <Route path={"/vendor/profile"} element={<VendorProfile />} />
                     </Route>
                 </Routes>
             </Router>

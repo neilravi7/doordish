@@ -46,7 +46,7 @@ const VendorLayout = () => {
                                         <Nav.Item><Link className="text-decoration-none btn rounded-pill btn-outline-primary me-2" to={'/vendor/home'}>Dashboard</Link></Nav.Item>
                                         <Nav.Item><Link className="text-decoration-none btn rounded-pill btn-outline-primary me-2" to={'/vendor/menu'}>Menu</Link></Nav.Item>
                                         <Nav.Item><Link className="text-decoration-none btn rounded-pill btn-outline-primary me-2" to={'vendor/orders'}>Orders</Link></Nav.Item>
-                                        <Nav.Item><Button variant='primary' className='rounded-pill ms-2'><FaUserCircle /> {user.email} </Button></Nav.Item>
+                                        <Nav.Item><Link className='text-decoration-none btn rounded-pill btn-success me-2' to={"/vendor/profile"}><FaUserCircle /> {user.email} </Link></Nav.Item>
                                         <Nav.Item><Button variant='dark' className='rounded-pill ms-2' onClick={handleLogout} data-toggle="tooltip" data-placement="top" title="Logout"><MdLogout /></Button></Nav.Item>
                                     </>
                                 )

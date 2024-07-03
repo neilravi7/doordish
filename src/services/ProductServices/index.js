@@ -28,7 +28,7 @@ const serviceCaller = async (
   if (response) {
     if (response.status === 200 || response.status === 201) {
       return { data: response.data, isError: false, message: successMessage };
-    } else if(response.status >= 400) {
+    } else if (response.status >= 400) {
       console.log({
         message: `${response.status}: ${errorMessage}`,
         isError: true,
@@ -58,7 +58,6 @@ export async function getAllProducts(vendorId) {
     "Unable to fetch product data"
   );
   return response;
-    
 }
 
 export async function createProduct(values) {
@@ -86,13 +85,38 @@ export async function updateProduct(values, productId) {
   return response;
 }
 
-export async function getProduct(productId){
-  const API_URL = `/menu/api/food/item/${productId}/`
+export async function getProduct(productId) {
+  const API_URL = `/menu/api/food/item/${productId}/`;
   const response = await serviceCaller(
-    "GET", 
-    API_URL, 
-    "Product fetched.", 
+    "GET",
+    API_URL,
+    "Product fetched.",
     "Unable to fetched product."
+  );
+  return response;
+}
+
+// Vendor services
+
+export async function getVendorData(vendorId) {
+  const API_URL = `/vendor/api/${vendorId}/profile`;
+  const response = await serviceCaller(
+    "GET",
+    API_URL,
+    "Vendor Data Fetched",
+    "Unable to fetch vendor data"
+  );
+  return response;
+}
+
+export async function updateVendorProfile(values, vendorId) {
+  const API_URL = `/vendor/api/${vendorId}/profile`;
+  const response = await serviceCaller(
+    "PUT",
+    API_URL,
+    "Profile data updated successfully",
+    "Unable to update profile data.",
+    values
   );
   return response;
 }
