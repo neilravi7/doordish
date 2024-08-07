@@ -7,10 +7,8 @@ import { getProduct } from "../../../services/ProductServices";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import Card from "react-bootstrap/Card";
-import {useVendorAuth} from '../../../hooks/useAuthVendor';
 
 const ProductDetail = () => {
-    useVendorAuth();
 
     const productId = useParams().productId;
     

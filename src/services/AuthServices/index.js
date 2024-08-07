@@ -3,7 +3,6 @@ import axios from "axios";
 
 const DB_NAME = import.meta.env.VITE_DB_NAME;
 const STORE_NAME = "auth";
-
 const serverUrl = import.meta.env.VITE_BACKEND_URL;
 
 // Make db instances
@@ -22,6 +21,13 @@ export async function setToken(token) {
   const db = await getDb();
   const tx = db.transaction(STORE_NAME, "readwrite");
   tx.objectStore(STORE_NAME).put(token, "admittance_jwt");
+  await tx.done;
+}
+
+export async function setLocalCart(cartItem){
+  const db = await getDb();
+  const tx = db.transaction(STORE_NAME, "readwrite");
+  tx.objectStore(STORE_NAME).put(cartItem, "user_cart");
   await tx.done;
 }
 
@@ -137,7 +143,7 @@ export async function register(values) {
     }
   } catch (error) {
     console.log("Some Code level problems");
-    if (error.response.status === 400 || error.response.status > 400) {
+    if (error.response.status === 400 || error.response.status > 401) {
       return {
         isError: true,
         message: `${error.response.status} Missing require fields.`,

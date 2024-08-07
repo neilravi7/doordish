@@ -14,10 +14,14 @@ import VendorLayout from "./layouts/VendorLayout";
 const HomePage = React.lazy(() => import("./pages/HomePage"));
 const LoginPage = React.lazy(() => import('./pages/LoginPage'));
 const SignUpPage = React.lazy(() => import('./pages/SignUpPage'));
+const RestaurantMenuPage = React.lazy(() => import('./pages/RestaurantMenuPage'));
 const VendorHomePage = React.lazy(() => import('./pages/Vendor/VendorHomePage'));
 const VendorMenuPage = React.lazy(() => import('./pages/Vendor/VendorMenuPage'));
 const ProductDetail = React.lazy(() => import("./pages/Vendor/ProductDetail"));
 const VendorProfile = React.lazy(() => import("./pages/Vendor/VendorProfile"));
+const CartPage = React.lazy(() => import('./pages/CartPage'));
+const CustomerProfilePage = React.lazy(() => import('./pages/CustomerProfilePage'))
+// const DemoCart = React.lazy(() => import('./pages/DemoCart'));
 
 const ProjectRoutes = () => {
     return (
@@ -30,12 +34,18 @@ const ProjectRoutes = () => {
                         <Route path="/home" element={<Navigate to="/" />} />
                         <Route path="/sign-in" element={<LoginPage  />} />
                         <Route path="/sign-up" element={<SignUpPage  />} />
+                        <Route path="/restaurant/:vendorId/items/" element={<RestaurantMenuPage />} />
+                        <Route path="/cart" element={<CartPage />} />
+                        {/* <Route path="/demo/cart" element={<DemoCart />} /> */}
+                        <Route path="/customer/profile" element={<CustomerProfilePage />}/>
                     </Route>
+
                     {/* Vendor Auth Layout */}
                     <Route path="/partners" element={<VendorAuthLayout />}>
                         <Route path="/partners/sign-in" element={<LoginForm/>}/>
                         <Route path="/partners/sign-up" element={<SignUpForm/>}/>
                     </Route>
+
                     {/* Vendor Dashboard */}
                     <Route path={"/vendor"} element={<VendorLayout />}>
                         <Route path={"/vendor/home"} element={<VendorHomePage />} />

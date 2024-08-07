@@ -5,6 +5,7 @@ const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
     const initialUserData = {
+        user_id: "",
         first_name: "",
         last_name: "",
         email: "",

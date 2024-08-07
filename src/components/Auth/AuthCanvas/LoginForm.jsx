@@ -31,6 +31,8 @@ const LoginForm = () => {
             setSubmitting(false);
             toast.success(response.message);
             updateUserLogin(true);
+            // const responseCart = await getCustomerCart()
+            // window.localStorage.setItem('cart', JSON.stringify(responseCart.data));
             const userData = await getUser();
             setUser(userData);          
             console.log("Is customer: ", userData.is_customer);

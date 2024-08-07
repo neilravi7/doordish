@@ -1,12 +1,18 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  margin: 0 auto;
+  text-align: center;
   line-height: 1.5;
   font-weight: 400;
 
+  background: rgb(255, 223, 222);
+  background: -moz-radial-gradient(circle, rgba(255, 223, 222, 1) 15%, rgba(255, 255, 255, 1) 97%);
+  background: -webkit-radial-gradient(circle, rgba(255, 223, 222, 1) 15%, rgba(255, 255, 255, 1) 97%);
+  background: radial-gradient(circle, rgba(255, 223, 222, 1) 15%, rgba(255, 255, 255, 1) 97%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffdfde", endColorstr="#ffffff", GradientType=1);
+ 
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -21,6 +27,20 @@ body {
   background: radial-gradient(circle, rgba(255, 223, 222, 1) 15%, rgba(255, 255, 255, 1) 97%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffdfde", endColorstr="#ffffff", GradientType=1);
 }
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+/* body{
+  background-color: #f9f6f2;
+  background: rgb(255, 223, 222);
+  background: -moz-radial-gradient(circle, rgba(255, 223, 222, 1) 15%, rgba(255, 255, 255, 1) 97%);
+  background: -webkit-radial-gradient(circle, rgba(255, 223, 222, 1) 15%, rgba(255, 255, 255, 1) 97%);
+  background: radial-gradient(circle, rgba(255, 223, 222, 1) 15%, rgba(255, 255, 255, 1) 97%);        
+  
+} */
 
 h1 {
   font-size: 3.2em;

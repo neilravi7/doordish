@@ -5,6 +5,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthProvider';
 import { toast } from 'react-toastify';
 import Button from 'react-bootstrap/Button';
+import CartButton from '../CartButton';
+import ProfileButton from '../ProfileButton';
 // import Form from 'react-bootstrap/Form';
 
 
@@ -34,8 +36,13 @@ const Navigation = () => {
               !isLoggedIn ? 
               (<Link to={"/sign-in"} className={'me-3 btn btn-dark rounded-pill'} > Login </Link>)
               :
-              (<><Button variant="dark" className="me-3 rounded-pill" onClick={handleLogout}>Logout</Button></>)
+              (<>
+                <CartButton></CartButton>
+                <ProfileButton></ProfileButton>
+                <Button variant="dark" className="me-3 rounded-pill" onClick={handleLogout}>Logout</Button>
+              </>)
             }
+            
           </Nav>
         </Navbar.Collapse>
       </Container>
